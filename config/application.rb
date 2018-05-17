@@ -37,5 +37,6 @@ module RecruiterReviewBackend
       end
     end
     ##########
+    config.autoload_paths << Rails.root.join('lib')
   end
 end
