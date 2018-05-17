@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
   get '/reviews' => 'reviews#index'
+  get '/reviews/:id' => 'reviews#show'
 end
