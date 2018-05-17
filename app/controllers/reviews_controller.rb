@@ -22,8 +22,10 @@ class ReviewsController < ApplicationController
     review = Review.find(params[:id])
     ################################
     # we may only need this if we want to go in deeper? depends on front end as well
-    # recruiter = Recruiter.find(review.recruiter_id)
-    # user = User.find(review.user_id)
+    recruiter = Recruiter.find(review.recruiter_id)
+    recruiterfullname = recruiter.firstname + " " + recruiter.lastname
+    user = User.find(review.user_id)
+    userfullname = user.firstname + " " + user.lastname
     # # puts params
     # # puts review
     # puts recruiter
@@ -32,7 +34,9 @@ class ReviewsController < ApplicationController
     newjson = {
       id: review.id,
       user_id: review.user_id,
+      userfullname: userfullname,
       recruiter_id: review.recruiter_id,
+      recruiterfullname: recruiterfullname,
       review: review.review,
        got_interview:  review.got_interview,
        got_job:  review.got_job,
