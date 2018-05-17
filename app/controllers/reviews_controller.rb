@@ -20,14 +20,41 @@ class ReviewsController < ApplicationController
 
   # POST /reviews
   def create
-    puts "*****************"
-    puts params #  Parameters: {"testbodykey"=>"testbosyvalue"}
-    puts "*****************"
-    # @todo = Todo.create(todo_params)
-    # json_response(@todo, :created)
-    render json: {"POSTED REVIEW": "ok"}  #works
-    # https://scotch.io/tutorials/build-a-restful-json-api-with-rails-5-part-one
-  end
+    if params[:user_id] && params[:recruiter_id] && params[:review]
+      user = User.find(params[:user_id])
+      puts user
+      recruiter = Recruiter.find(params[:recruiter_id])
+      puts recruiter
+      ################################
+      params["got_interview"] ? got_interview = params["got_interview"] : got_interview = false
+      params["got_job"] ? got_job = params["got_job"] : got_job = false
+      got_job ? got_interview = true : "null" #if got job then must have had interview
+      params["rating"] ? rating = params["rating"] : rating = 0 #0 means not rated
+      params["recommended"] ? recommended = params["recommended"] : recommended = false
+      params["ghoster"] ? ghoster = params["ghoster"] : ghoster = false
+
+      review = Review.new(
+        user_id: user.id,
+        recruiter_id: recruiter.id,
+        review: review,
+        got_interview:  got_interview,
+        got_job:  got_job,
+        rating: rating,
+        recommended: recommended,
+        ghoster:  ghoster
+      ) #Review.new
+
+      if review.save
+        render json: {"POSTED REVIEW": "ok"}  #works
+      else
+        render json: {"error": "ERROR SAVE POSTED REVIEW"}
+      end
+      ################################
+      # render json: {"POSTED REVIEW": "ok"}  #works
+    else
+      render json: {"error": "no user_id or recruiter_id or review"}
+    end #  if params[:user_id]
+  end #class
 
 
 
