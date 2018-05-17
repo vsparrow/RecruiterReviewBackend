@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   post "/reviews" => "reviews#create"
   get '/recruiters' => 'recruiters#index'
   get '/recruiters/:id' => 'recruiters#show'
+  post '/recruiters' => 'recruiters#create'
+
 end

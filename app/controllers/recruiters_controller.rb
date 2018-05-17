@@ -54,6 +54,38 @@ class RecruitersController < ApplicationController
     end
   end #show
 
+  def create
+    if params[:firstname] && params[:lastname] && params[:email]#the right params
+      #params to varaibles
+      firstname = params[:firstname]
+      lastname = params[:lastname]
+      email = params[:email]
+      params[:phonenumber] ? phonenumber = params[:phonenumber] : phonenumber = ""
+      params[:website] ? website = params[:website] : website = ""
+      params[:linkedin] ? linkedin = params[:linkedin] : linkedin = ""
+      params[:location] ? location = params[:location] : location = ""
+      params[:company] ? company = params[:company] : company = ""
+      #new recruiter
+      recruiter = Recruiter.new(
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        phonenumber: phonenumber,
+        website: website,
+        company: company,
+        linkedin: linkedin,
+        location: location
+      )
+      if recruiter.save
+        render json: {"POSTED RECRUITER": "ok"}  #works#send success
+      else
+        render json: {"error": "ERROR SAVE POSTED RECRUITER"} #else send error on save
+      end
+    else
+      render json: {"error": "missing data"}
+    end
+  end #create
+
   def dude_wheres_my_record
     render json: {"error": "not found"}
   end
