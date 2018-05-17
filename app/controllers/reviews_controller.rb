@@ -7,6 +7,7 @@ class ReviewsController < ApplicationController
     rjson = reviews.map do  |r|
       # puts r
       newjson = {
+        id: r.id,
         user_id: r.user_id,
         recruiter_id: r.recruiter_id,
         review: r.review
