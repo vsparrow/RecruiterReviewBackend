@@ -18,6 +18,19 @@ class ReviewsController < ApplicationController
     render json: rjson
   end #end index
 
+  # POST /reviews
+  def create
+    puts "*****************"
+    puts params #  Parameters: {"testbodykey"=>"testbosyvalue"}
+    puts "*****************"
+    # @todo = Todo.create(todo_params)
+    # json_response(@todo, :created)
+    render json: {"POSTED REVIEW": "ok"}  #works
+    # https://scotch.io/tutorials/build-a-restful-json-api-with-rails-5-part-one
+  end
+
+
+
   def show
     review = Review.find(params[:id])
     ################################
