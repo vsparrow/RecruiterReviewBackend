@@ -35,6 +35,11 @@ class RecruitersController < ApplicationController
     recruiter=Recruiter.find(params[:id])
     if recruiter
       # render json: "HELLO REVIEW"  #works
+      reviews = Review.all.select { |r| r.recruiter_id == recruiter.id}
+      puts "*********************"
+      puts reviews.as_json
+      puts "*********************"
+
       newjson = {
         id: recruiter.id,
         firstname: recruiter.firstname,
@@ -45,7 +50,8 @@ class RecruitersController < ApplicationController
         website: recruiter.website,
         company: recruiter.company,
         linkedin: recruiter.linkedin,
-        location: recruiter.location
+        location: recruiter.location,
+        reviews: reviews.as_json
       }
       render json: newjson
 

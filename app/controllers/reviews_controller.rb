@@ -56,6 +56,9 @@ class ReviewsController < ApplicationController
     end #  if params[:user_id]
   end #class
 
+  def find #better practice would be to use a component to add this functionaly to the recruiter's object
+
+  end
 
 
   def show
