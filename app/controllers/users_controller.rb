@@ -19,7 +19,11 @@ class UsersController < ActionController::API
         lastname = params[:lastname]
         email = params[:email]
         password = params[:password]
-        render json: {"ok": "we made it to create"}
+        if User.create(firstname: firstname, lastname: lastname, email: email, password: password)
+          render json: {"ok": "we made it to create"}
+        else
+          render json: {"error": "Missing create data, during create"}
+        end
       else
         render json: {"error": "Missing create data, too small"}
       end
