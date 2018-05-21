@@ -22,9 +22,9 @@ class ReviewsController < ApplicationController
   def create
     if params[:user_id] && params[:recruiter_id] && params[:review]
       user = User.find(params[:user_id])
-      puts user
+      # puts user
       recruiter = Recruiter.find(params[:recruiter_id])
-      puts recruiter
+      # puts recruiter
       ################################
       params["got_interview"] ? got_interview = params["got_interview"] : got_interview = false
       params["got_job"] ? got_job = params["got_job"] : got_job = false
@@ -32,11 +32,15 @@ class ReviewsController < ApplicationController
       params["rating"] ? rating = params["rating"] : rating = 0 #0 means not rated
       params["recommended"] ? recommended = params["recommended"] : recommended = false
       params["ghoster"] ? ghoster = params["ghoster"] : ghoster = false
-
+      # puts "*********$"
+      # puts params
+      # puts recommended
+      # puts params[:recommended]
+      # puts "***************$"
       review = Review.new(
         user_id: user.id,
         recruiter_id: recruiter.id,
-        review: review,
+        review: params["review"],
         got_interview:  got_interview,
         got_job:  got_job,
         rating: rating,
