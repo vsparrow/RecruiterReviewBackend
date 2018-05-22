@@ -85,7 +85,7 @@ class RecruitersController < ApplicationController
         # user_id: user_id
       )
       if recruiter.save
-        render json: {"POSTED RECRUITER": "ok"}  #works#send success
+        render json: {"POSTED RECRUITER": "ok", recruiter_id: recruiter.id}  #works#send success
       else
         render json: {"error": "ERROR SAVE POSTED RECRUITER"} #else send error on save
       end
