@@ -71,6 +71,7 @@ class RecruitersController < ApplicationController
       params[:linkedin] ? linkedin = params[:linkedin] : linkedin = ""
       params[:location] ? location = params[:location] : location = ""
       params[:company] ? company = params[:company] : company = ""
+      # params[:user_id] ? user_id = params[:user_id] : user_id = ""  #future setup, not process if not there.
       #new recruiter
       recruiter = Recruiter.new(
         firstname: firstname,
@@ -81,6 +82,7 @@ class RecruitersController < ApplicationController
         company: company,
         linkedin: linkedin,
         location: location
+        # user_id: user_id
       )
       if recruiter.save
         render json: {"POSTED RECRUITER": "ok"}  #works#send success
