@@ -100,10 +100,38 @@ class RecruitersController < ApplicationController
 
   def search
     puts "*******************"
-    puts params
-    puts params[:search]
+    # puts params
+    # puts params[:search]
     puts "*******************"
+    searchterm = params[:search]
+    response = search_recruiters(searchterm)                                    #search recruiters for term
+    # puts response
     render json: {"received": "request"}
   end #search
+
+  private
+  def search_recruiters(searchterm)
+    # puts searchterm
+    recruiters = Recruiter.all
+    contain_searchterm=[]
+    recruiters.each do |recruiter|
+      # recruiter.select { |key,value| value.include?(searchterm)} #not work
+      # puts recruiter #works
+      # puts recruiter.attributes #works
+       # recruiter.attributes.select { |key,value| puts key} #works
+       # recruiter.attributes.select { |key,value| puts value} #works
+        # recruiter.attributes.each { |key,value|  puts value; value.include?(searchterm)} #not work
+       contain_searchterm.push(recruiter) if recruiter.firstname.downcase.include?(searchterm)
+       contain_searchterm.push(recruiter) if recruiter.lastname.downcase.include?(searchterm)
+       contain_searchterm.push(recruiter) if recruiter.email.downcase.include?(searchterm)
+       contain_searchterm.push(recruiter) if recruiter.website.downcase.include?(searchterm)
+       contain_searchterm.push(recruiter) if recruiter.company.downcase.include?(searchterm)
+       contain_searchterm.push(recruiter) if recruiter.linkedin.downcase.include?(searchterm)
+       contain_searchterm.push(recruiter) if recruiter.location.downcase.include?(searchterm)
+       contain_searchterm.push(recruiter) if recruiter.phonenumber.include?(searchterm)
+    end # each
+    puts contain_searchterm
+    "donaldduck"
+  end
 
 end #class
