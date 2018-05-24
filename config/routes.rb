@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   get '/recruiters' => 'recruiters#index'
   get '/recruiters/:id' => 'recruiters#show'
   post '/recruiters' => 'recruiters#create'
-  get '/search' => 'recruiters#search'
+  post '/search' => 'recruiters#search'
   post 'authenticate', to: 'authentication#authenticate'
 end

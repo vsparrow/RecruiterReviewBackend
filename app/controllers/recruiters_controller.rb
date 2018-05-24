@@ -99,6 +99,10 @@ class RecruitersController < ApplicationController
   end
 
   def search
+    puts "*******************"
+    puts params
+    puts params[:search]
+    puts "*******************"
     render json: {"received": "request"}
   end #search
 
