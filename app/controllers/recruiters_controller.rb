@@ -105,7 +105,7 @@ class RecruitersController < ApplicationController
     puts "*******************"
     searchterm = params[:search]
     response = search_recruiters(searchterm)                                    #search recruiters for term
-    # puts response
+    puts response
     render json: {"received": "request"}
   end #search
 
@@ -130,8 +130,32 @@ class RecruitersController < ApplicationController
        contain_searchterm.push(recruiter) if recruiter.location.downcase.include?(searchterm)
        contain_searchterm.push(recruiter) if recruiter.phonenumber.include?(searchterm)
     end # each
-    puts contain_searchterm
-    "donaldduck"
+    # puts contain_searchterm
+    #now return AR objects or a JSON?
+
+    # "donaldduck"
+    make_jsonable_object(contain_searchterm)
+  end
+
+  def make_jsonable_object(activerecord_objects_array) #possibly highlight what the search term was
+    jsonable_object= []
+    activerecord_objects_array.each do | recruiter|
+      json = {
+        id: recruiter.id,
+        firstname: recruiter.firstname,
+        lastname: recruiter.lastname,
+        email: recruiter.email,
+        phonenumber: recruiter.phonenumber,
+        is_generated: recruiter.is_generated,
+        website: recruiter.website,
+        company: recruiter.company,
+        linkedin: recruiter.linkedin,
+        location: recruiter.location
+        # reviews: reviews.as_json
+      }
+    jsonable_object.push(json)
+    end #each
+    jsonable_object
   end
 
 end #class
