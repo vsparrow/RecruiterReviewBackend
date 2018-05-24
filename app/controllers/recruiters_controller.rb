@@ -97,4 +97,9 @@ class RecruitersController < ApplicationController
   def dude_wheres_my_record
     render json: {"error": "not found"}
   end
+
+  def search
+    render json: {"received": "request"}
+  end #search
+
 end #class
