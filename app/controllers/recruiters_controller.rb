@@ -107,7 +107,7 @@ class RecruitersController < ApplicationController
     response = search_recruiters(searchterm)                                    #search recruiters for term
     puts response
     # render json: {"received": "request"}
-    render json: {response: response}
+    render json: {response_recruiters: response}
   end #search
 
   private
@@ -122,14 +122,14 @@ class RecruitersController < ApplicationController
        # recruiter.attributes.select { |key,value| puts key} #works
        # recruiter.attributes.select { |key,value| puts value} #works
         # recruiter.attributes.each { |key,value|  puts value; value.include?(searchterm)} #not work
-       contain_searchterm.push(recruiter) if recruiter.firstname.downcase.include?(searchterm)
-       contain_searchterm.push(recruiter) if recruiter.lastname.downcase.include?(searchterm)
-       contain_searchterm.push(recruiter) if recruiter.email.downcase.include?(searchterm)
-       contain_searchterm.push(recruiter) if recruiter.website.downcase.include?(searchterm)
-       contain_searchterm.push(recruiter) if recruiter.company.downcase.include?(searchterm)
-       contain_searchterm.push(recruiter) if recruiter.linkedin.downcase.include?(searchterm)
-       contain_searchterm.push(recruiter) if recruiter.location.downcase.include?(searchterm)
-       contain_searchterm.push(recruiter) if recruiter.phonenumber.include?(searchterm)
+       contain_searchterm.push([recruiter,"firstname"]) if recruiter.firstname.downcase.include?(searchterm)
+       contain_searchterm.push([recruiter,"lastname"]) if recruiter.lastname.downcase.include?(searchterm)
+       contain_searchterm.push([recruiter,"email"]) if recruiter.email.downcase.include?(searchterm)
+       contain_searchterm.push([recruiter,"website"]) if recruiter.website.downcase.include?(searchterm)
+       contain_searchterm.push([recruiter,"company"]) if recruiter.company.downcase.include?(searchterm)
+       contain_searchterm.push([recruiter,"linkedin"]) if recruiter.linkedin.downcase.include?(searchterm)
+       contain_searchterm.push([recruiter,"location"]) if recruiter.location.downcase.include?(searchterm)
+       contain_searchterm.push([recruiter,"phonenumber"]) if recruiter.phonenumber.include?(searchterm)
     end # each
     # puts contain_searchterm
     #now return AR objects or a JSON?
@@ -142,16 +142,17 @@ class RecruitersController < ApplicationController
     jsonable_object= []
     activerecord_objects_array.each do | recruiter|
       json = {
-        id: recruiter.id,
-        firstname: recruiter.firstname,
-        lastname: recruiter.lastname,
-        email: recruiter.email,
-        phonenumber: recruiter.phonenumber,
-        is_generated: recruiter.is_generated,
-        website: recruiter.website,
-        company: recruiter.company,
-        linkedin: recruiter.linkedin,
-        location: recruiter.location
+        id: recruiter[0].id,
+        firstname: recruiter[0].firstname,
+        lastname: recruiter[0].lastname,
+        email: recruiter[0].email,
+        phonenumber: recruiter[0].phonenumber,
+        is_generated: recruiter[0].is_generated,
+        website: recruiter[0].website,
+        company: recruiter[0].company,
+        linkedin: recruiter[0].linkedin,
+        location: recruiter[0].location,
+        foundterm: recruiter[1]
         # reviews: reviews.as_json
       }
     jsonable_object.push(json)
