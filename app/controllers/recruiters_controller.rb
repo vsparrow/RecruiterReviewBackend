@@ -106,7 +106,8 @@ class RecruitersController < ApplicationController
     searchterm = params[:search]
     response = search_recruiters(searchterm)                                    #search recruiters for term
     puts response
-    render json: {"received": "request"}
+    # render json: {"received": "request"}
+    render json: {response: response}
   end #search
 
   private
