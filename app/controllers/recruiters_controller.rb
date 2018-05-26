@@ -106,26 +106,49 @@ class RecruitersController < ApplicationController
     searchterm = params[:search]
     response = search_recruiters(searchterm)                                    #search recruiters for term
     response_reviews = search_reviews(searchterm)
-    puts response
+    # puts response
+    # puts response_reviews
     # render json: {"received": "request"}
-    render json: {response_recruiters: response}
+    render json: {response_recruiters: response, response_reviews: response_reviews}
   end #search
 
   private
 
   def search_reviews(searchterm)
-    puts "*******************"
+    # puts "*******************"
     # puts searchterm
-    puts "*******************"
+    # puts "*******************"
     reviews=Review.all
     contain_searchterm = []
     reviews.each do |review|
-      puts review.attributes
+      # puts review.attributes
       if review.review && review.review.length > 0
         contain_searchterm.push([review,review.recruiter_id, review.recruiter.firstname, review.recruiter.lastname]) if review.review.downcase.include?(searchterm)
       end
     end #each
-    puts contain_searchterm
+    # puts contain_searchterm
+    make_jsonable_object_search_reviews(contain_searchterm)
+  end
+
+  def make_jsonable_object_search_reviews(activerecord_objects_array) #possibly highlight what the search term was
+    puts activerecord_objects_array
+    jsonable_object= []
+    activerecord_objects_array.each do | review|
+      json = {
+        recruiter_id: review[1],
+        firstname: review[3],
+        lastname: review[4],
+        review: review[0].review,
+        got_interview: review[0].got_interview,
+        got_job: review[0].got_job,
+        rating: review[0].rating,
+        recommended: review[0].recommended
+        # reviews: reviews.as_json
+        # "got_interview"=>true, "got_job"=>true, "rating"=>3, "is_generated"=>nil, "recommended"=>true,
+      }
+    jsonable_object.push(json)
+    end #each
+    jsonable_object
   end
 
   def search_recruiters(searchterm)
