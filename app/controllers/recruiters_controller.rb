@@ -115,8 +115,17 @@ class RecruitersController < ApplicationController
 
   def search_reviews(searchterm)
     puts "*******************"
-    puts searchterm
+    # puts searchterm
     puts "*******************"
+    reviews=Review.all
+    contain_searchterm = []
+    reviews.each do |review|
+      puts review.attributes
+      if review.review && review.review.length > 0
+        contain_searchterm.push([review,review.recruiter_id]) if review.review.downcase.include?(searchterm)
+      end
+    end #each
+    puts contain_searchterm
   end
 
   def search_recruiters(searchterm)
