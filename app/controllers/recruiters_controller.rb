@@ -99,18 +99,26 @@ class RecruitersController < ApplicationController
   end
 
   def search
-    puts "*******************"
+    # puts "*******************"
     # puts params
     # puts params[:search]
-    puts "*******************"
+    # puts "*******************"
     searchterm = params[:search]
     response = search_recruiters(searchterm)                                    #search recruiters for term
+    response_reviews = search_reviews(searchterm)
     puts response
     # render json: {"received": "request"}
     render json: {response_recruiters: response}
   end #search
 
   private
+
+  def search_reviews(searchterm)
+    puts "*******************"
+    puts searchterm
+    puts "*******************"
+  end
+
   def search_recruiters(searchterm)
     # puts searchterm
     recruiters = Recruiter.all
