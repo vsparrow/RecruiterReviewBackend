@@ -122,7 +122,7 @@ class RecruitersController < ApplicationController
     reviews.each do |review|
       puts review.attributes
       if review.review && review.review.length > 0
-        contain_searchterm.push([review,review.recruiter_id]) if review.review.downcase.include?(searchterm)
+        contain_searchterm.push([review,review.recruiter_id, review.recruiter.firstname, review.recruiter.lastname]) if review.review.downcase.include?(searchterm)
       end
     end #each
     puts contain_searchterm
