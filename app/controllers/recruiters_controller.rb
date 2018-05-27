@@ -136,8 +136,8 @@ class RecruitersController < ApplicationController
     activerecord_objects_array.each do | review|
       json = {
         recruiter_id: review[1],
-        firstname: review[3],
-        lastname: review[4],
+        firstname: review[2],
+        lastname: review[3],
         review: review[0].review,
         got_interview: review[0].got_interview,
         got_job: review[0].got_job,
