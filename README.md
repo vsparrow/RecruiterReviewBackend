@@ -8,7 +8,7 @@ If you have PostgreSQL already installed, follow the section "Installing". After
 
 ### Prerequisites
 
-* [Recruiter Review Frontend](https://github.com/vsparrow/RecruiterReviewFrontend) - API to be used with the front end platform
+* [Recruiter Review Frontend](https://github.com/vsparrow/RecruiterReviewFrontend) -  Front end platform to be used with the API
 
 ```
 PostgreSQL 10 recommended for your databse
