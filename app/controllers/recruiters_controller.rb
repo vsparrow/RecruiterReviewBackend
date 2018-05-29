@@ -122,14 +122,14 @@ class RecruitersController < ApplicationController
        # recruiter.attributes.select { |key,value| puts key} #works
        # recruiter.attributes.select { |key,value| puts value} #works
         # recruiter.attributes.each { |key,value|  puts value; value.include?(searchterm)} #not work
-       contain_searchterm.push([recruiter,"firstname"]) if recruiter.firstname.downcase.include?(searchterm)
-       contain_searchterm.push([recruiter,"lastname"]) if recruiter.lastname.downcase.include?(searchterm)
-       contain_searchterm.push([recruiter,"email"]) if recruiter.email.downcase.include?(searchterm)
-       contain_searchterm.push([recruiter,"website"]) if recruiter.website.downcase.include?(searchterm)
-       contain_searchterm.push([recruiter,"company"]) if recruiter.company.downcase.include?(searchterm)
-       contain_searchterm.push([recruiter,"linkedin"]) if recruiter.linkedin.downcase.include?(searchterm)
-       contain_searchterm.push([recruiter,"location"]) if recruiter.location.downcase.include?(searchterm)
-       contain_searchterm.push([recruiter,"phonenumber"]) if recruiter.phonenumber.include?(searchterm)
+       contain_searchterm.push([recruiter,"firstname"]) if recruiter.firstname.downcase.include?(searchterm.downcase)
+       contain_searchterm.push([recruiter,"lastname"]) if recruiter.lastname.downcase.include?(searchterm.downcase)
+       contain_searchterm.push([recruiter,"email"]) if recruiter.email.downcase.include?(searchterm.downcase)
+       contain_searchterm.push([recruiter,"website"]) if recruiter.website.downcase.include?(searchterm.downcase)
+       contain_searchterm.push([recruiter,"company"]) if recruiter.company.downcase.include?(searchterm.downcase)
+       contain_searchterm.push([recruiter,"linkedin"]) if recruiter.linkedin.downcase.include?(searchterm.downcase)
+       contain_searchterm.push([recruiter,"location"]) if recruiter.location.downcase.include?(searchterm.downcase)
+       contain_searchterm.push([recruiter,"phonenumber"]) if recruiter.phonenumber.include?(searchterm.downcase)
     end # each
     # puts contain_searchterm
     #now return AR objects or a JSON?
