@@ -36,9 +36,10 @@ class RecruitersController < ApplicationController
     if recruiter
       # render json: "HELLO REVIEW"  #works
       reviews = Review.all.select { |r| r.recruiter_id == recruiter.id}
-      puts "*********************"
-      puts reviews.as_json
-      puts "*********************"
+      reviews = reviews.sort_by { |r| r.id}.reverse #timing benchmark is best according to https://stackoverflow.com/questions/4264133/descending-sort-by-value-of-a-hash-in-ruby
+      # puts "*********************"
+      # puts reviews.as_json
+      # puts "*********************"
 
       newjson = {
         id: recruiter.id,
