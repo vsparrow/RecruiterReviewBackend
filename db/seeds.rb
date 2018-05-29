@@ -9,7 +9,7 @@ user4 = User.create(   firstname: Faker::Name.first_name,     lastname: Faker::N
 user5 = User.create(   firstname: Faker::Name.first_name,     lastname: Faker::Name.last_name,     email: Faker::Internet.email,     password_digest: "something",     admin: false,   scrambleview: false  )
 users = [user1,user2,user3,user4,user5]
 
-5.times do
+10.times do
   company = Faker::Internet.domain_word
   website = "www." + company + ".com"
   lastname = Faker::Name.last_name
