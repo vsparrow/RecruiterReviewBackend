@@ -22,9 +22,28 @@ website = "www." + company + ".com"
 lastname = Faker::Name.last_name
 email = lastname.downcase + "@" + company + ".com"
 linkedin = "http://lnkd.in/" + lastname.downcase
-recruiter = Recruiter.create( firstname:  Faker::Name.first_name,   lastname:  lastname,   email:  email,   phonenumber:  Faker::PhoneNumber.cell_phone,   is_generated:  true,   website:  website ,   company:  company.capitalize + " Inc.",   linkedin:  linkedin,   location:  Faker::Address.state)
+recruiter1 = Recruiter.create( firstname:  Faker::Name.first_name,   lastname:  lastname,   email:  email,   phonenumber:  Faker::PhoneNumber.cell_phone,   is_generated:  true,   website:  website ,   company:  company.capitalize + " Inc.",   linkedin:  linkedin,   location:  Faker::Address.state)
 #
-# review1 = Review.create(  user_id: user1.id,  recruiter_id: recruiter1.id,   review: "Meow yowling nonstop the whole night, you have cat to be kitten me right meow ",   got_interview: false,   got_job: false,  rating: 2,   is_generated: true,   recommended: false,   ghoster: true)
+# review = Faker::Lorem.words(rand(10..20))
+review = Review.new(  user_id: user1.id,  recruiter_id: recruiter1.id,   review: Faker::Lorem.words(rand(20..60)).join(' '),   got_interview: [true, false].sample,   got_job: [true, false].sample,  recommended: [true, false].sample, rating: [1, 2, 3, 4, 5].sample,   is_generated: true,     ghoster: true)
+review.got_job ? review.got_interview = true : ""
+review.save
+review = Review.new(  user_id: user1.id,  recruiter_id: recruiter1.id,   review: Faker::Lorem.words(rand(20..60)).join(' '),   got_interview: [true, false].sample,   got_job: [true, false].sample,  recommended: [true, false].sample, rating: [1, 2, 3, 4, 5].sample,   is_generated: true,     ghoster: true)
+review.got_job ? review.got_interview = true : ""
+review.save
+review = Review.new(  user_id: user1.id,  recruiter_id: recruiter1.id,   review: Faker::Lorem.words(rand(20..60)).join(' '),   got_interview: [true, false].sample,   got_job: [true, false].sample,  recommended: [true, false].sample, rating: [1, 2, 3, 4, 5].sample,   is_generated: true,     ghoster: true)
+review.got_job ? review.got_interview = true : ""
+review.save
+review = Review.new(  user_id: user1.id,  recruiter_id: recruiter1.id,   review: Faker::Lorem.words(rand(20..60)).join(' '),   got_interview: [true, false].sample,   got_job: [true, false].sample,  recommended: [true, false].sample, rating: [1, 2, 3, 4, 5].sample,   is_generated: true,     ghoster: true)
+review.got_job ? review.got_interview = true : ""
+review.save
+review = Review.new(  user_id: user1.id,  recruiter_id: recruiter1.id,   review: Faker::Lorem.words(rand(20..60)).join(' '),   got_interview: [true, false].sample,   got_job: [true, false].sample,  recommended: [true, false].sample, rating: [1, 2, 3, 4, 5].sample,   is_generated: true,     ghoster: true)
+review.got_job ? review.got_interview = true : ""
+review.save
+# review = Review.new(  user_id: user1.id,  recruiter_id: recruiter1.id,   review: Faker::Lorem.words(rand(20..60)).join(' '),   got_interview: [true, false].sample,   got_job: [true, false].sample,  recommended: [true, false].sample, rating: [1, 2, 3, 4, 5].sample,   is_generated: true,     ghoster: true)
+# review.got_job ? review.got_interview = true : null
+# review = Review.new(  user_id: user1.id,  recruiter_id: recruiter1.id,   review: Faker::Lorem.words(rand(20..60)).join(' '),   got_interview: [true, false].sample,   got_job: [true, false].sample,  recommended: [true, false].sample, rating: [1, 2, 3, 4, 5].sample,   is_generated: true,     ghoster: true)
+# review.got_job ? review.got_interview = true : null
 # review2 = Review.create(  user_id: user1.id,  recruiter_id: recruiter2.id,   review: "Meow yowling nonstop the whole night, you have cat to be kitten me right meow ",   got_interview: true,   got_job: false,  rating: 4,   is_generated: true,   recommended: true,   ghoster: false)
 # review3 = Review.create(  user_id: user1.id,  recruiter_id: recruiter3.id,   review: "Meow yowling nonstop the whole night, you have cat to be kitten me right meow ",   got_interview: true,   got_job: true,  rating: 5,   is_generated: true,   recommended: true,   ghoster: false)
 # review4 = Review.create(  user_id: user2.id,  recruiter_id: recruiter1.id,   review: "Meow yowling nonstop the whole night, you have cat to be kitten me right meow ",   got_interview: true,   got_job: true,  rating: 5,   is_generated: true,   recommended: true,   ghoster: false)
