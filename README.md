@@ -32,21 +32,21 @@ Now connect to it with the Frontend app
 ## Testing
 
 For use with POSTMAN
-```
+
 Signup
 ```
 POST http://127.0.0.1:3000/signup   body: { firstname: "some_first_name", lastname: "some_last_name", email: "some_email_address@someDomain.com", password: "password_of_that_address"}
-
 ```
+
 Authenticate (Login)
 ```
 POST http://127.0.0.1:3000/authenticate   body: { email: "some_email_address", password: "password_of_that_address"}
-
 ```
+
 Get list of recruiters
 ```
 GET http://127.0.0.1:3000/recruiters   headers: { authorization: "key_obtained_from_post_authenticate"}
-
+```
 
 ## Built With
 
