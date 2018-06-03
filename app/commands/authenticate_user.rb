@@ -1,4 +1,5 @@
-require 'jwt'
+# require 'jwt'
+require_relative '../../lib/json_web_token.rb'
 
 class AuthenticateUser
   prepend SimpleCommand
