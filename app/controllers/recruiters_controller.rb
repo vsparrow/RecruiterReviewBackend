@@ -178,16 +178,16 @@ class RecruitersController < ApplicationController
       end  #each
       if rating_exists > 0
         old_average_rating = average_rating
-        average_rating = average_rating / rating_exists  #could use float to get 1/2 score but just MVP now
+        average_rating = average_rating.to_f / rating_exists  #could use float to get 1/2 score but just MVP now
       end
     end
-    # puts "*********************"
+    puts "*********************"
     # # puts review.first.rating
     # # puts reviews.first.rating
-    # puts old_average_rating
-    # puts rating_exists
-    # puts average_rating
-    # puts "*********************"
+    puts old_average_rating
+    puts rating_exists
+    puts average_rating
+    puts "*********************"
     average_rating
   end #get_average_rating
 end #class
