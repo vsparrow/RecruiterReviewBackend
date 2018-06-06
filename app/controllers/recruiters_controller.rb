@@ -38,6 +38,7 @@ class RecruitersController < ApplicationController
       reviews = Review.all.select { |r| r.recruiter_id == recruiter.id}
       reviews = reviews.sort_by { |r| r.id}.reverse #timing benchmark is best according to https://stackoverflow.com/questions/4264133/descending-sort-by-value-of-a-hash-in-ruby
       # puts "*********************"
+      average_rating = get_average_rating(reviews)
       # puts reviews.as_json
       # puts "*********************"
 
@@ -52,6 +53,7 @@ class RecruitersController < ApplicationController
         company: recruiter.company,
         linkedin: recruiter.linkedin,
         location: recruiter.location,
+        average_rating: average_rating,
         reviews: reviews.as_json
       }
       render json: newjson
@@ -161,4 +163,31 @@ class RecruitersController < ApplicationController
     jsonable_object
   end
 
+  def get_average_rating(reviews)
+    average_rating = 0
+    rating_exists = 0
+    old_average_rating = 0
+    if reviews.length === 0
+      average_rating = 0
+    else
+      reviews.each do  |r|
+        if r.rating
+          average_rating += r.rating
+          rating_exists += 1
+        end #if r.review
+      end  #each
+      if rating_exists > 0
+        old_average_rating = average_rating
+        average_rating = average_rating / rating_exists  #could use float to get 1/2 score but just MVP now
+      end
+    end
+    # puts "*********************"
+    # # puts review.first.rating
+    # # puts reviews.first.rating
+    # puts old_average_rating
+    # puts rating_exists
+    # puts average_rating
+    # puts "*********************"
+    average_rating
+  end #get_average_rating
 end #class
